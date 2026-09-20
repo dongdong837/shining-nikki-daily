@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="probe_click_target" type="id" />
+    <item name="probe_scroll_view" type="id" />
+</resources>

@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.shiningprobe'
+    compileSdk 36
+    buildToolsVersion '36.0.0'
+
+    defaultConfig {
+        applicationId 'com.example.shiningprobe'
+        minSdk 30
+        targetSdk 36
+        versionCode 7
+        versionName '0.5.0'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+def generatedGuideAssets = layout.buildDirectory.dir('generated/guideAssets').get().asFile
+def syncGuideAssets = tasks.register('syncGuideAssets', Sync) {
+    from(rootProject.file('../闪暖日活流程.md')) {
+        into 'guide'
+        rename { 'flow.md' }
+    }
+    from(rootProject.file('../闪暖日活流程图片')) {
+        into 'guide/images'
+    }
+    into generatedGuideAssets
+}
+
+android.sourceSets.main.assets.srcDir(generatedGuideAssets)
+tasks.named('preBuild').configure {
+    dependsOn syncGuideAssets
+}

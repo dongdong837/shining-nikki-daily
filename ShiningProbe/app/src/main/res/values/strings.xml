@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">闪暖日活校准</string>
+    <string name="accessibility_description">显示逐步流程引导，保存用户主动标记的校准截图，并提供由用户手动触发的能力测试。</string>
+</resources>
